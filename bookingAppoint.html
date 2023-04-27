@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>appointment booking project</title>
+    <style>
+        .appointment {
+
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label for="input1">Enter Name</label>
+        <input class="input1" id="input1" type="text">
+
+        <label for="input2">Enter Mail</label>
+        <input class="input2" id="input2" type="email">
+
+        <label for="input3">Enter PhoneNumber</label>
+        <input class="input3" id="input3" type="number">
+
+        <input type="submit" id="submit">
+
+    </form>
+    <div class="appointments">
+        <!-- <li class="appointment"> <button class="delete">Delete</button></li> -->
+
+    </div>
+
+    <script>
+
+        let submit = document.querySelector('#submit');
+
+        submit.addEventListener('click', (e) => {
+            e.preventDefault();
+            // getting values from input
+
+            let name = document.querySelector('#input1').value;
+            let email = document.querySelector('#input2').value;
+            let phoneNumber = document.querySelector('#input3').value;
+
+            //creating object from the all values
+
+            let obj = {
+                name,
+                email,
+                phoneNumber
+            }
+
+            // working on local storage
+
+            let data = localStorage.setItem(email, JSON.stringify(obj));
+
+            // working on created elements
+
+            let li = document.createElement('li');
+
+            li.classList = 'appointment';
+
+            // delete button and basic requirement for delete operation
+
+            let deleteBtn = document.createElement('button')
+            deleteBtn.classList = 'delete'
+            let textDelete = document.createTextNode('Delete');
+            deleteBtn.appendChild(textDelete);
+            console.log(deleteBtn)
+
+            // creating edite button
+            let editBtn = document.createElement('button')
+            editBtn.classList = 'edit';
+            editBtn.style.margin = '5px'
+            let textEdit = document.createTextNode('Edit');
+            editBtn.appendChild(textEdit);
+
+            let aptData = localStorage.getItem(email);
+
+            let parsedData = JSON.parse(aptData);
+
+            let liData = (`${parsedData.name} - ${parsedData.email} - ${parsedData.phoneNumber}`);
+
+            let aptText = document.createTextNode(liData);
+
+            li.appendChild(aptText);
+            li.appendChild(deleteBtn);
+            li.appendChild(editBtn)
+
+            let appointments = document.querySelector('.appointments');
+
+            appointments.appendChild(li)
+
+
+            // delete button functionality
+
+            deleteBtn.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete')) {
+                    let li = e.target.parentElement;
+                    appointments.removeChild(li)
+
+                    localStorage.removeItem(email)
+
+                }
+            })
+
+            // adding edite functionality
+            
+            editBtn.addEventListener('click', (e) => {
+                if (e.target.classList.contains('edit')) {
+
+                    localStorage.removeItem(email)
+
+                    document.querySelector('.input1').value = parsedData.name;
+                    document.querySelector('.input2').value = parsedData.email;
+                    document.querySelector('.input3').value = parsedData.phoneNumber;
+
+                }
+            })
+            
+        })
+    </script>
+</body>
+</html>
