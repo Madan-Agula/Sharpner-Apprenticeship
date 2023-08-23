@@ -9,7 +9,7 @@ const showError = document.getElementById("error");
 
 
 function getItem() {
-    axios.get("https://crudcrud.com/api/4c8b4f6735f9436080915e4c8668ff59/availableCandyOnShop")
+    axios.get("https://crudcrud.com/api/616ead9c14fa4ef8a655404a11632460/availableCandyOnShop")
         .then((resposne) => {
             showUserOnScreen(resposne.data);
         })
@@ -30,7 +30,7 @@ function addItem(e) {
         price: candyPrice.value,
         quantity: candyQuantity.value
     }
-    axios.post("https://crudcrud.com/api/4c8b4f6735f9436080915e4c8668ff59/availableCandyOnShop", obj)
+    axios.post("https://crudcrud.com/api/616ead9c14fa4ef8a655404a11632460/availableCandyOnShop", obj)
         .then((resposne) => {
             console.log(resposne)
             location.reload();
@@ -43,7 +43,7 @@ function addItem(e) {
 
 
 function showUserOnScreen(responseData) {
-    tableData = "";
+  let tableData = "";
     responseData.forEach((object) => {
         tableData += `
       <tr>
@@ -63,7 +63,7 @@ function showUserOnScreen(responseData) {
 
 
 function updateQuantity(id, qty) {
-    axios.get("https://crudcrud.com/api/4c8b4f6735f9436080915e4c8668ff59/availableCandyOnShop/" + id)
+    axios.get("https://crudcrud.com/api/616ead9c14fa4ef8a655404a11632460/availableCandyOnShop/" + id)
         .then((resposne) => {
 
             let newQty = (resposne.data.quantity);
@@ -75,7 +75,7 @@ function updateQuantity(id, qty) {
                     price: resposne.data.price,
                     quantity: resposne.data.quantity - qty
                 }
-                axios.put("https://crudcrud.com/api/4c8b4f6735f9436080915e4c8668ff59/availableCandyOnShop/" + id, newObj).then((resposne) => location.reload())
+                axios.put("https://crudcrud.com/api/616ead9c14fa4ef8a655404a11632460/availableCandyOnShop/" + id, newObj).then((resposne) => location.reload())
             }
             else {
                 showError.innerHTML = `Qty. is not available`
