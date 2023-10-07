@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Group Chat</title>
+</head>
+<body>
+  <h1>Group Chat</h1>
+  <form action="/sendMessage" method="POST">
+    <input type="text" id="message" name="message" placeholder="Enter your message" required>
+    <button type="submit">Send</button>
+  </form>
+  <div id="chat">
+    <!-- Chat messages will be displayed here -->
+  </div>
+  <script>
+    async function fetchChat() {
+      const response = await fetch('/chat');
+      const chatLog = await response.text();
+      document.getElementById('chat').innerText = chatLog;
+    }
+
+    setInterval(fetchChat, 2000);
+  </script>
+</body>
+</html>
