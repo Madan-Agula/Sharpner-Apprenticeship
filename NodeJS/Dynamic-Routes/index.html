@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Frontend Design</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #555;
+      padding: 10px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    section {
+      padding: 20px;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>My Frontend Design</h1>
+  </header>
+
+  <nav>
+    <a href="#" onclick="loadContent('home')">Home</a>
+    <a href="#" onclick="loadContent('about')">About</a>
+    <a href="#" onclick="loadContent('contact')">Contact</a>
+  </nav>
+
+  <section id="content">
+    <!-- Content will be dynamically loaded here -->
+  </section>
+
+  <footer>
+    &copy; 2023 My Frontend Design
+  </footer>
+
+  <script>
+    // Function to load content dynamically
+    function loadContent(page) {
+      // You can fetch content from the server or generate it dynamically based on the page parameter
+      let content = '';
+
+      if (page === 'home') {
+        content = 'Welcome to the home page!';
+      } else if (page === 'about') {
+        content = 'This is the about page.';
+      } else if (page === 'contact') {
+        content = 'Contact us at contact@example.com';
+      }
+
+      document.getElementById('content').innerHTML = content;
+    }
+
+    // Load default content
+    loadContent('home');
+  </script>
+
+</body>
+</html>
